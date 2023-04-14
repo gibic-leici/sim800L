@@ -1,0 +1,16 @@
+../Core/Src/sim800.c:7:6:InitSIM	16	static
+../Core/Src/sim800.c:18:6:EnviarComandoAT	24	static
+../Core/Src/sim800.c:25:6:EnviarAT	16	static
+../Core/Src/sim800.c:32:6:ConsultarSignal	16	static
+../Core/Src/sim800.c:38:6:ConsultarEstadoSIM	16	static
+../Core/Src/sim800.c:44:6:ListarRedesDisponibles	80	static
+../Core/Src/sim800.c:54:6:EnviarSMS	24	static
+../Core/Src/sim800.c:64:6:ListarSMS	16	static
+../Core/Src/sim800.c:71:6:BorrarAllSMS	16	static
+../Core/Src/sim800.c:77:6:LeerSMS_i	80	static
+../Core/Src/sim800.c:89:5:ListenSMS	24	static
+../Core/Src/sim800.c:102:6:Imprimir_respuesta	16	static
+../Core/Src/sim800.c:112:6:Borrar_respuesta	16	static
+../Core/Src/sim800.c:117:5:ExtraerIndiceCMTI	24	static
+../Core/Src/sim800.c:127:6:ExtraerTextoDeSMS	40	static
+../Core/Src/sim800.c:151:6:InicializarComandos	16	static

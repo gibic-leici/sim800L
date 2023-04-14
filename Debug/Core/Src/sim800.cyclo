@@ -1,0 +1,16 @@
+sim800.c:7:6:InitSIM	1
+sim800.c:18:6:EnviarComandoAT	1
+sim800.c:25:6:EnviarAT	1
+sim800.c:32:6:ConsultarSignal	1
+sim800.c:38:6:ConsultarEstadoSIM	1
+sim800.c:44:6:ListarRedesDisponibles	1
+sim800.c:54:6:EnviarSMS	1
+sim800.c:64:6:ListarSMS	1
+sim800.c:71:6:BorrarAllSMS	1
+sim800.c:77:6:LeerSMS_i	2
+sim800.c:89:5:ListenSMS	2
+sim800.c:102:6:Imprimir_respuesta	2
+sim800.c:112:6:Borrar_respuesta	1
+sim800.c:117:5:ExtraerIndiceCMTI	2
+sim800.c:127:6:ExtraerTextoDeSMS	4
+sim800.c:151:6:InicializarComandos	1
