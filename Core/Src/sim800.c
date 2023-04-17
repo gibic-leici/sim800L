@@ -12,7 +12,6 @@ void InitSIM(SIM800* sim, UART_HandleTypeDef * huart){
 												  // Segundo num: el 1 es para que guarde internamente los msj, despues para leerlos hay que usar CMGR. Si esto lo pones en 2 forwardea el msj directamente y no guarda nada
 	memset(sim->response, 0, LENGTH);
 	memset(sim->txt_last_sms, 0, LEN_TXT);
-	InicializarComandos(sim);
 }
 
 void EnviarComandoAT(SIM800* sim, char* comando)
@@ -25,6 +24,16 @@ void EnviarComandoAT(SIM800* sim, char* comando)
 void EnviarAT(SIM800* sim)
 {
 	EnviarComandoAT(sim,"AT\r\n");
+	Imprimir_respuesta(sim,1);
+}
+
+void EnviarPuertoSerie(SIM800 *sim)
+{
+	char msj [50];
+	scanf("%s",msj);
+	strcat(msj,"\r\n");
+	printf("Enviando: %s",msj);
+	EnviarComandoAT(sim,msj);
 	Imprimir_respuesta(sim,1);
 }
 
@@ -147,9 +156,3 @@ void ExtraerTextoDeSMS(SIM800 *sim, int indice, char * texto)
 	}
 	*(texto+j+1)='\0';
 }
-
-void InicializarComandos(SIM800 *sim)
-{
-	strcpy(sim-> comandos.LED_TOGGLE,"\r\nLED_TOGGLE\r\n");
-}
-

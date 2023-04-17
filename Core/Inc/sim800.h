@@ -14,12 +14,7 @@
 #define TIMEOUT 1000
 
 typedef struct{
-	char LED_TOGGLE [LEN_CMD];
-} comandos;
-
-typedef struct{
 	UART_HandleTypeDef * huart;
-	comandos comandos;
 	char response [LENGTH];
 	char txt_last_sms [LEN_TXT];
 } SIM800;
@@ -28,12 +23,12 @@ typedef struct{
 // Inicializacion
 void InitSIM(SIM800* sim, UART_HandleTypeDef * huart);
 void EnviarAT(SIM800* sim);
-void InicializarComandos(SIM800 *sim);
 
 // Generales
 void EnviarComandoAT(SIM800* sim, char* comando);
 void Imprimir_respuesta(SIM800 *sim,int borrar); // Imprime y borra
 void Borrar_respuesta(SIM800 *sim);
+void EnviarPuertoSerie(SIM800 *sim);
 
 // Funciones de status
 void ListarRedesDisponibles(SIM800* sim);

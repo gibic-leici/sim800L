@@ -59,10 +59,14 @@ static void MX_USART1_UART_Init(void);
 static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
 
+// Esto redirige el scanf y el printf a la UART del puerto serie
+
 #ifdef __GNUC__
 #define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+#define GETCHAR_PROTOTYPE int __io_getchar(void)
 #else
 #define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+#define GETCHAR_PROTOTYPE int fgetc(FILE *f)
 #endif
 
 PUTCHAR_PROTOTYPE
@@ -70,6 +74,22 @@ PUTCHAR_PROTOTYPE
   HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, HAL_MAX_DELAY);
   return ch;
 }
+
+GETCHAR_PROTOTYPE
+{
+  uint8_t ch = 0;
+
+  /* Clear the Overrun flag just before receiving the first character */
+  __HAL_UART_CLEAR_OREFLAG(&huart1);
+
+  /* Wait for reception of a character on the USART RX line and echo this
+   * character on console */
+  HAL_UART_Receive(&huart1, (uint8_t *)&ch, 1, HAL_MAX_DELAY);
+  HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, HAL_MAX_DELAY);
+  return ch;
+}
+
+
 
 /* USER CODE END PFP */
 
@@ -104,6 +124,9 @@ int main(void)
 
   /* USER CODE BEGIN SysInit */
 
+  setvbuf(stdin, NULL, _IONBF, 0);	// Esto es necesario para que scanf ande bien
+  	  	  	  	  	  	  	  	    // con esto y lo de arriba ya anda el scanf :)
+
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
@@ -111,13 +134,12 @@ int main(void)
   MX_USART1_UART_Init();
   MX_USART2_UART_Init();
 
-
-
   /* USER CODE BEGIN 2 */
 
   printf("Test de comandos AT... \r\n");
 
   // Inicializacion de la clase con la que manejo el sim800L
+
   SIM800 sim800;
   InitSIM(&sim800,&huart2);
   HAL_Delay(1000);
@@ -125,7 +147,7 @@ int main(void)
   EnviarAT(&sim800);
   ConsultarSignal(&sim800);
   ConsultarEstadoSIM(&sim800);
-  ListarRedesDisponibles(&sim800);
+//  ListarRedesDisponibles(&sim800);
 
   //EnviarSMS(&sim800,"+5492966544589","Hola desde el SIM800");
 
@@ -137,24 +159,52 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
-  printf("Esperando por SMS...\r\n");
-  HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+
+
+
   while (1)
   {
+	printf("Bienvenido al Test de SIM800L\r\n");
+	printf("1) Ingresar comandos AT manualmente\r\n");
+	printf("2) Ingresar al modo SMS \r\n");
 
-	/*
-	HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
-	HAL_Delay(2000);
-	*/
+	int opcion1;
+	char opcion2;
+	scanf("%d",&opcion1);
 
-	if(ListenSMS(&sim800) == 1)
+	switch(opcion1)
 	{
-		printf("Texto del mensaje: %s",sim800.txt_last_sms);
+	case 1:
+		do{
+			printf("Ingrese el comando AT que desea enviar al modulo \r\n:");
+			EnviarPuertoSerie(&sim800);
 
-		if(strncmp((sim800.txt_last_sms),sim800.comandos.LED_TOGGLE,strlen(sim800.comandos.LED_TOGGLE)) == 0)
-		{
-			HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
-		}
+			printf("Desea ingresar otro comando? (s/n) \r\n");
+			fflush(stdin);
+			scanf("%c",&opcion2);
+			}while( opcion2 == 's');
+		break;
+	case 2:
+			do{
+				printf("Esperando por SMS...\r\n");
+				char comando1 [LEN_CMD] = "\r\nLED_TOGGLE\r\n";
+
+				while(ListenSMS(&sim800)==0)
+				{
+					//HAL_Delay(1000);
+				}
+
+				printf("Texto del mensaje: %s",sim800.txt_last_sms);
+				if(strncmp((sim800.txt_last_sms),comando1,strlen(comando1)) == 0)
+				{
+					HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+				}
+
+				printf("Desea esperar por otro SMS? (s/n) \r\n");
+				fflush(stdin);
+				scanf("%c",&opcion2);
+				}while( opcion2 == 's');
+			break;
 	}
 
 
