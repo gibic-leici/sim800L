@@ -8,10 +8,11 @@
 #ifndef INC_SIM800_H_
 #define INC_SIM800_H_
 
-#define LENGTH 1000
-#define LEN_TXT 50
+#define LENGTH 2000
+#define LEN_TXT 100
 #define LEN_CMD 50
-#define TIMEOUT 1000
+#define TIMEOUT 500
+#define WAIT_MAX 10000
 
 typedef struct{
 	UART_HandleTypeDef * huart;
@@ -21,14 +22,19 @@ typedef struct{
 
 
 // Inicializacion
-void InitSIM(SIM800* sim, UART_HandleTypeDef * huart);
+void InitSIM(SIM800* sim, UART_HandleTypeDef * huart,int print);
 void EnviarAT(SIM800* sim);
 
+
 // Generales
-void EnviarComandoAT(SIM800* sim, char* comando);
-void Imprimir_respuesta(SIM800 *sim,int borrar); // Imprime y borra
+void EnviarComandoAT(SIM800* sim, char* comando, int print);
+void Enviar(SIM800 *sim, char * cadena);
+void Imprimir_respuesta(SIM800 *sim); // Imprime y borra
 void Borrar_respuesta(SIM800 *sim);
 void EnviarPuertoSerie(SIM800 *sim);
+int WaitForAnswer(SIM800* sim,int print);
+void Listen(SIM800* sim);
+int isConnected(SIM800 *sim,int print);
 
 // Funciones de status
 void ListarRedesDisponibles(SIM800* sim);
@@ -36,14 +42,17 @@ void ConsultarEstadoSIM(SIM800* sim);
 void ConsultarSignal(SIM800* sim);
 
 // Funciones de SMS
-void EnviarSMS(SIM800 * sim, char * numero, char* mensaje );
+void EnviarSMS(SIM800 * sim, char * numero, char* mensaje,int print  );
 void ListarSMS( SIM800 *sim );
-void BorrarAllSMS(SIM800 *sim);
+void BorrarAllSMS(SIM800 *sim,int print);
 void LeerSMS_i(SIM800 *sim, int i,int imprimir);
 int ListenSMS(SIM800 * sim);
 int ExtraerIndiceCMTI(char * codigo);
 void ExtraerTextoDeSMS(SIM800 *sim, int indice, char * texto);
 
-
+// Funciones de GPRS
+void InitGPRS(SIM800 *sim,int print);
+void TestGPRS(SIM800* sim,int print);
+void SendTCPtoIP(SIM800* sim, char * msj, char* IP, int port,int print);
 
 #endif /* INC_SIM800_H_ */

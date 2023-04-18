@@ -1,0 +1,14 @@
+C:\Users\mati9\Documents\01-ProyectosSTM32\sim800L\Terminal_TCP\Terminal_TCP\Terminal_TCP\bin\Debug\netcoreapp3.1\Terminal_TCP.exe
+C:\Users\mati9\Documents\01-ProyectosSTM32\sim800L\Terminal_TCP\Terminal_TCP\Terminal_TCP\bin\Debug\netcoreapp3.1\Terminal_TCP.deps.json
+C:\Users\mati9\Documents\01-ProyectosSTM32\sim800L\Terminal_TCP\Terminal_TCP\Terminal_TCP\bin\Debug\netcoreapp3.1\Terminal_TCP.runtimeconfig.json
+C:\Users\mati9\Documents\01-ProyectosSTM32\sim800L\Terminal_TCP\Terminal_TCP\Terminal_TCP\bin\Debug\netcoreapp3.1\Terminal_TCP.runtimeconfig.dev.json
+C:\Users\mati9\Documents\01-ProyectosSTM32\sim800L\Terminal_TCP\Terminal_TCP\Terminal_TCP\bin\Debug\netcoreapp3.1\Terminal_TCP.dll
+C:\Users\mati9\Documents\01-ProyectosSTM32\sim800L\Terminal_TCP\Terminal_TCP\Terminal_TCP\bin\Debug\netcoreapp3.1\Terminal_TCP.pdb
+C:\Users\mati9\Documents\01-ProyectosSTM32\sim800L\Terminal_TCP\Terminal_TCP\Terminal_TCP\obj\Debug\netcoreapp3.1\Terminal_TCP.csproj.AssemblyReference.cache
+C:\Users\mati9\Documents\01-ProyectosSTM32\sim800L\Terminal_TCP\Terminal_TCP\Terminal_TCP\obj\Debug\netcoreapp3.1\Terminal_TCP.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mati9\Documents\01-ProyectosSTM32\sim800L\Terminal_TCP\Terminal_TCP\Terminal_TCP\obj\Debug\netcoreapp3.1\Terminal_TCP.AssemblyInfoInputs.cache
+C:\Users\mati9\Documents\01-ProyectosSTM32\sim800L\Terminal_TCP\Terminal_TCP\Terminal_TCP\obj\Debug\netcoreapp3.1\Terminal_TCP.AssemblyInfo.cs
+C:\Users\mati9\Documents\01-ProyectosSTM32\sim800L\Terminal_TCP\Terminal_TCP\Terminal_TCP\obj\Debug\netcoreapp3.1\Terminal_TCP.csproj.CoreCompileInputs.cache
+C:\Users\mati9\Documents\01-ProyectosSTM32\sim800L\Terminal_TCP\Terminal_TCP\Terminal_TCP\obj\Debug\netcoreapp3.1\Terminal_TCP.dll
+C:\Users\mati9\Documents\01-ProyectosSTM32\sim800L\Terminal_TCP\Terminal_TCP\Terminal_TCP\obj\Debug\netcoreapp3.1\Terminal_TCP.pdb
+C:\Users\mati9\Documents\01-ProyectosSTM32\sim800L\Terminal_TCP\Terminal_TCP\Terminal_TCP\obj\Debug\netcoreapp3.1\Terminal_TCP.genruntimeconfig.cache

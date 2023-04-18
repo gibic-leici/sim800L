@@ -86,6 +86,7 @@ GETCHAR_PROTOTYPE
    * character on console */
   HAL_UART_Receive(&huart1, (uint8_t *)&ch, 1, HAL_MAX_DELAY);
   HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, HAL_MAX_DELAY);
+
   return ch;
 }
 
@@ -141,36 +142,66 @@ int main(void)
   // Inicializacion de la clase con la que manejo el sim800L
 
   SIM800 sim800;
-  InitSIM(&sim800,&huart2);
-  HAL_Delay(1000);
+  InitSIM(&sim800,&huart2,1);
 
   EnviarAT(&sim800);
-  ConsultarSignal(&sim800);
   ConsultarEstadoSIM(&sim800);
-//  ListarRedesDisponibles(&sim800);
 
-  //EnviarSMS(&sim800,"+5492966544589","Hola desde el SIM800");
+  printf("Conectando a la red...\r\n");
+  while(isConnected(&sim800,0) != 1 )
+  {
+	  printf("Todavia no se ha podido establecer la conexion.\r\n");
+	  printf("1) Reintentar\r\n");
+	  printf("2) Diagnosticar\r\n");
+	  printf("3) Ingresar comandos AT manualmente\r\n");
 
-  ListarSMS(&sim800);
-  BorrarAllSMS(&sim800);
+	  int opcion;
+	  char opcion2;
+	  scanf("%d",&opcion);
+	  switch(opcion)
+	  {
+	  case 1:
+		  break;
+	  case 2:
+		  ConsultarSignal(&sim800);
+		  ListarRedesDisponibles(&sim800);
+		  break;
+	  case 3:
+		  do{
+			  printf("Ingrese el comando AT que desea enviar al modulo \r\n:");
+			  EnviarPuertoSerie(&sim800);
+			  printf("Desea ingresar otro comando? (s/n) \r\n");
+			  fflush(stdin);
+			  scanf("%c",&opcion2);
+		  }while( opcion2 == 's');
+		  break;
+	  }
+  }
+
+  InitGPRS(&sim800,1);
+  printf("Conectado con exito\r\n");
+
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
-
-
-
   while (1)
   {
 	printf("Bienvenido al Test de SIM800L\r\n");
 	printf("1) Ingresar comandos AT manualmente\r\n");
-	printf("2) Ingresar al modo SMS \r\n");
+	printf("2) Recibir msj SMS \r\n");
+	printf("3) Enviar msj SMS \r\n");
+	printf("4) Testear el modo GPRS\r\n");
+	printf("5) Enviar un msj TCP\r\n");
 
 	int opcion1;
 	char opcion2;
 	scanf("%d",&opcion1);
+
+	char IP [50] = "181.231.229.4";
+	int puerto = 1050;
 
 	switch(opcion1)
 	{
@@ -189,22 +220,38 @@ int main(void)
 				printf("Esperando por SMS...\r\n");
 				char comando1 [LEN_CMD] = "\r\nLED_TOGGLE\r\n";
 
-				while(ListenSMS(&sim800)==0)
+				if (ListenSMS(&sim800) == 1)
 				{
-					//HAL_Delay(1000);
+					printf("Texto del mensaje: %s",sim800.txt_last_sms);
+					if(strncmp((sim800.txt_last_sms),comando1,strlen(comando1)) == 0)
+					{
+						HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+					}
 				}
 
-				printf("Texto del mensaje: %s",sim800.txt_last_sms);
-				if(strncmp((sim800.txt_last_sms),comando1,strlen(comando1)) == 0)
-				{
-					HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
-				}
 
 				printf("Desea esperar por otro SMS? (s/n) \r\n");
 				fflush(stdin);
 				scanf("%c",&opcion2);
 				}while( opcion2 == 's');
+
 			break;
+
+	case 3:
+		EnviarSMS(&sim800,"+5492966544589","Hola desde el SIM800 por SMS",1);
+		break;
+
+	case 4:
+		printf("Probando GPRS, recuperando algo de una pag web... \r\n");
+		TestGPRS(&sim800,1);
+		break;
+
+	case 5:
+		printf("Enviando un msj al IP: %s\r\n",IP);
+		SendTCPtoIP(&sim800, "Hola desde el SIM800L por protocolo TCP\r\n", IP, puerto,1);
+		break;
+
+
 	}
 
 
