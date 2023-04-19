@@ -147,40 +147,56 @@ int main(void)
   EnviarAT(&sim800);
   ConsultarEstadoSIM(&sim800);
 
-  printf("Conectando a la red...\r\n");
-  while(isConnected(&sim800,0) != 1 )
-  {
-	  printf("Todavia no se ha podido establecer la conexion.\r\n");
-	  printf("1) Reintentar\r\n");
-	  printf("2) Diagnosticar\r\n");
-	  printf("3) Ingresar comandos AT manualmente\r\n");
 
-	  int opcion;
-	  char opcion2;
-	  scanf("%d",&opcion);
-	  switch(opcion)
+  int bypass_conection = 0;
+
+  printf("Conectando a la red...(Presione alguna tecla para diagnosticar)\r\n");
+
+
+  while( ( isConnected(&sim800,0) != 1 ) && (bypass_conection == 0) )
+  {
+	  if (getchar() != EOF)
 	  {
-	  case 1:
-		  break;
-	  case 2:
-		  ConsultarSignal(&sim800);
-		  ListarRedesDisponibles(&sim800);
-		  break;
-	  case 3:
-		  do{
-			  printf("Ingrese el comando AT que desea enviar al modulo \r\n:");
-			  EnviarPuertoSerie(&sim800);
-			  printf("Desea ingresar otro comando? (s/n) \r\n");
-			  fflush(stdin);
-			  scanf("%c",&opcion2);
-		  }while( opcion2 == 's');
-		  break;
+		  {
+			  printf("Todavia no se ha podido establecer la conexion.\r\n");
+		  	  printf("1) Reintentar\r\n");
+		  	  printf("2) Diagnosticar\r\n");
+		  	  printf("3) Ingresar comandos AT manualmente\r\n");
+		  	  printf("4) Continuar sin conexion");
+
+		  	  int opcion;
+		  	  char opcion2;
+		  	  scanf("%d",&opcion);
+		  	  switch(opcion)
+		  	  {
+		  	  case 1:
+		  		  break;
+		  	  case 2:
+		  		  ConsultarSignal(&sim800);
+		  		  HAL_Delay(1000);
+		  		  ListarRedesDisponibles(&sim800);
+		  		  break;
+		  	  case 3:
+		  		  do{
+		  			  printf("Ingrese el comando AT que desea enviar al modulo \r\n:");
+		  			  EnviarPuertoSerie(&sim800);
+		  			  printf("Desea ingresar otro comando? (s/n) \r\n");
+		  			  fflush(stdin);
+		  			  scanf("%c",&opcion2);
+		  		  }while( opcion2 == 's');
+		  		  break;
+
+		  	  case 4:
+		  		  bypass_conection=1;
+		  		  break;
+		  	  }
+		    }
 	  }
   }
-
-  InitGPRS(&sim800,1);
   printf("Conectado con exito\r\n");
 
+
+  //InitGPRS(&sim800,1);
 
   /* USER CODE END 2 */
 
@@ -243,11 +259,13 @@ int main(void)
 
 	case 4:
 		printf("Probando GPRS, recuperando algo de una pag web... \r\n");
+		InitGPRS(&sim800,1);
 		TestGPRS(&sim800,1);
 		break;
 
 	case 5:
 		printf("Enviando un msj al IP: %s\r\n",IP);
+		InitGPRS(&sim800,1);
 		SendTCPtoIP(&sim800, "Hola desde el SIM800L por protocolo TCP\r\n", IP, puerto,1);
 		break;
 
