@@ -11,6 +11,8 @@ void InitSIM(SIM800* sim, UART_HandleTypeDef * huart,int print)
 	memset(sim->response, 0, LENGTH);
 	memset(sim->txt_last_sms, 0, LEN_TXT);
 
+	memset(sim->buffer_largo,'c',LEN_BUF_LARGO);
+
 	EnviarComandoAT(sim,"AT+CMGF=1\r\n",print); // Activa modo texto
 	EnviarComandoAT(sim,"AT+CNMI=2,1,0,0,0\r\n",print); // Configura recepcion de SMS
 												  // Esto es importante : Primer num: el 2 es para que guarde los msj en un buffer si la conexion Uart esta ocupada
@@ -84,7 +86,6 @@ void InitGPRS(SIM800 *sim,int print)
 
 	EnviarComandoAT(sim,"AT+CIICR\r\n",print);	// Inicializa el GPRS
 
-	WaitForAnswer(sim,print);
 
 	EnviarComandoAT(sim,"AT+CIFSR\r\n",print);	// Debería imprimir el IP
 }
@@ -115,22 +116,33 @@ void TestGPRS(SIM800* sim,int print)
 	WaitForAnswer(sim,1);
 	WaitForAnswer(sim,1);
 
-	EnviarComandoAT(sim,"AT+CIPCLOSE\r\n",print);
 }
+
+// IMPORTANTE -> Esto anda hasta 450 bytes en msj sino se traba todo!
 
 void SendTCPtoIP(SIM800* sim, char * msj, char* IP, int port,int print)
 {
-	char cmd [LEN_TXT];
-	sprintf(cmd,"AT+CIPSTART=\"TCP\",\"%s\",%d\r\n",IP,port);
-	EnviarComandoAT(sim,cmd,print);
-	WaitForAnswer(sim, 1); // Aca espero dos veces porque primero va el OK y despues el connect OK
+	if(strlen(msj)<=450)
+	{
+		EnviarComandoAT(sim,"AT+CIFSR\r\n",print);	// Debería imprimir el IP
 
-	char cmd2 [LEN_TXT];
-	sprintf(cmd2,"AT+CIPSEND=%d\r\n",strlen(msj));
-	EnviarComandoAT(sim,cmd2,print);
-	EnviarComandoAT(sim,msj,print);
+		char cmd [LEN_TXT];
+		sprintf(cmd,"AT+CIPSTART=\"TCP\",\"%s\",%d\r\n",IP,port);
+		EnviarComandoAT(sim,cmd,print);
+		WaitForAnswer(sim, 1); // Aca espero dos veces porque primero va el OK y despues el connect OK
 
-	EnviarComandoAT(sim,"AT+CIPCLOSE\r\n",print);
+		char cmd2 [LEN_TXT];
+		sprintf(cmd2,"AT+CIPSEND=%d\r\n",strlen(msj));
+		EnviarComandoAT(sim,cmd2,print);
+		EnviarComandoAT(sim,msj,print);
+		EnviarComandoAT(sim,"AT+CIPCLOSE\r\n",print);
+	}
+	else
+	{
+		printf("Msj demasiado largo para mandar de esta forma \r\n");
+	}
+
+
 }
 
 

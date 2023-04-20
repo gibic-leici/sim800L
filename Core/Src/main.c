@@ -196,7 +196,7 @@ int main(void)
   printf("Conectado con exito\r\n");
 
 
-  //InitGPRS(&sim800,1);
+  InitGPRS(&sim800,1);
 
   /* USER CODE END 2 */
 
@@ -211,6 +211,7 @@ int main(void)
 	printf("3) Enviar msj SMS \r\n");
 	printf("4) Testear el modo GPRS\r\n");
 	printf("5) Enviar un msj TCP\r\n");
+	printf("6) Enviar un msj largo (1500 bytes) por TCP\r\n");
 
 	int opcion1;
 	char opcion2;
@@ -259,14 +260,17 @@ int main(void)
 
 	case 4:
 		printf("Probando GPRS, recuperando algo de una pag web... \r\n");
-		InitGPRS(&sim800,1);
 		TestGPRS(&sim800,1);
 		break;
 
 	case 5:
 		printf("Enviando un msj al IP: %s\r\n",IP);
-		InitGPRS(&sim800,1);
 		SendTCPtoIP(&sim800, "Hola desde el SIM800L por protocolo TCP\r\n", IP, puerto,1);
+		break;
+
+	case 6:
+		printf("Enviando un msj largo al IP: %s\r\n",IP);
+		SendTCPtoIP(&sim800, sim800.buffer_largo , IP, puerto,1);
 		break;
 
 

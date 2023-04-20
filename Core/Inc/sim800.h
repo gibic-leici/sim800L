@@ -13,11 +13,13 @@
 #define LEN_CMD 50
 #define TIMEOUT 500
 #define WAIT_MAX 10000
+#define LEN_BUF_LARGO 450
 
 typedef struct{
 	UART_HandleTypeDef * huart;
 	char response [LENGTH];
 	char txt_last_sms [LEN_TXT];
+	char buffer_largo [LEN_BUF_LARGO];
 } SIM800;
 
 
@@ -54,5 +56,8 @@ void ExtraerTextoDeSMS(SIM800 *sim, int indice, char * texto);
 void InitGPRS(SIM800 *sim,int print);
 void TestGPRS(SIM800* sim,int print);
 void SendTCPtoIP(SIM800* sim, char * msj, char* IP, int port,int print);
+
+
+
 
 #endif /* INC_SIM800_H_ */
