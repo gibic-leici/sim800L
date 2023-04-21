@@ -255,7 +255,7 @@ void LeerSMS_i(SIM800 *sim, int i, int print)
 	EnviarComandoAT(sim,msj,print);
 }
 
-// Esto se rompio arreglalo antes de irte para ser feliz
+
 int ListenSMS(SIM800 * sim, UART_HandleTypeDef * huart1 )
 {
 	Borrar_respuesta(sim);

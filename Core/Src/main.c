@@ -154,7 +154,7 @@ int main(void)
 
   while( ( isConnected(&sim800,0) != 1 ) && (bypass_conection == 0) )
   {
-	  if (getchar() != EOF)
+	  if (__HAL_UART_GET_FLAG(&huart1, UART_FLAG_RXNE) == SET)
 	  {
 		  {
 			  printf("Todavia no se ha podido establecer la conexion.\r\n");
@@ -183,7 +183,9 @@ int main(void)
 		  		  bypass_conection=1;
 		  		  break;
 		  	  }
+
 		    }
+		  printf("Conectando a la red...(Presione alguna tecla para diagnosticar)\r\n");
 	  }
   }
   printf("Conectado con exito\r\n");
@@ -222,7 +224,7 @@ int main(void)
 		break;
 	case 2:
 			do{
-				printf("Esperando por SMS...\r\n");
+				printf("Esperando por SMS (Presione ctrl+z para abortar)...\r\n");
 				char comando1 [LEN_CMD] = "\r\nLED_TOGGLE\r\n";
 
 				if (ListenSMS(&sim800,&huart1) == 1)
