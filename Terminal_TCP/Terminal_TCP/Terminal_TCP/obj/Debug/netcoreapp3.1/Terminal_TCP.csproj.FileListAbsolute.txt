@@ -12,3 +12,17 @@ C:\Users\mati9\Documents\01-ProyectosSTM32\sim800L\Terminal_TCP\Terminal_TCP\Ter
 C:\Users\mati9\Documents\01-ProyectosSTM32\sim800L\Terminal_TCP\Terminal_TCP\Terminal_TCP\obj\Debug\netcoreapp3.1\Terminal_TCP.dll
 C:\Users\mati9\Documents\01-ProyectosSTM32\sim800L\Terminal_TCP\Terminal_TCP\Terminal_TCP\obj\Debug\netcoreapp3.1\Terminal_TCP.pdb
 C:\Users\mati9\Documents\01-ProyectosSTM32\sim800L\Terminal_TCP\Terminal_TCP\Terminal_TCP\obj\Debug\netcoreapp3.1\Terminal_TCP.genruntimeconfig.cache
+C:\Users\MatiOliva\Documents\06-Proyectos_STM32\sim800L\Terminal_TCP\Terminal_TCP\Terminal_TCP\bin\Debug\netcoreapp3.1\Terminal_TCP.exe
+C:\Users\MatiOliva\Documents\06-Proyectos_STM32\sim800L\Terminal_TCP\Terminal_TCP\Terminal_TCP\bin\Debug\netcoreapp3.1\Terminal_TCP.deps.json
+C:\Users\MatiOliva\Documents\06-Proyectos_STM32\sim800L\Terminal_TCP\Terminal_TCP\Terminal_TCP\bin\Debug\netcoreapp3.1\Terminal_TCP.runtimeconfig.json
+C:\Users\MatiOliva\Documents\06-Proyectos_STM32\sim800L\Terminal_TCP\Terminal_TCP\Terminal_TCP\bin\Debug\netcoreapp3.1\Terminal_TCP.runtimeconfig.dev.json
+C:\Users\MatiOliva\Documents\06-Proyectos_STM32\sim800L\Terminal_TCP\Terminal_TCP\Terminal_TCP\bin\Debug\netcoreapp3.1\Terminal_TCP.dll
+C:\Users\MatiOliva\Documents\06-Proyectos_STM32\sim800L\Terminal_TCP\Terminal_TCP\Terminal_TCP\bin\Debug\netcoreapp3.1\Terminal_TCP.pdb
+C:\Users\MatiOliva\Documents\06-Proyectos_STM32\sim800L\Terminal_TCP\Terminal_TCP\Terminal_TCP\obj\Debug\netcoreapp3.1\Terminal_TCP.csproj.AssemblyReference.cache
+C:\Users\MatiOliva\Documents\06-Proyectos_STM32\sim800L\Terminal_TCP\Terminal_TCP\Terminal_TCP\obj\Debug\netcoreapp3.1\Terminal_TCP.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MatiOliva\Documents\06-Proyectos_STM32\sim800L\Terminal_TCP\Terminal_TCP\Terminal_TCP\obj\Debug\netcoreapp3.1\Terminal_TCP.AssemblyInfoInputs.cache
+C:\Users\MatiOliva\Documents\06-Proyectos_STM32\sim800L\Terminal_TCP\Terminal_TCP\Terminal_TCP\obj\Debug\netcoreapp3.1\Terminal_TCP.AssemblyInfo.cs
+C:\Users\MatiOliva\Documents\06-Proyectos_STM32\sim800L\Terminal_TCP\Terminal_TCP\Terminal_TCP\obj\Debug\netcoreapp3.1\Terminal_TCP.csproj.CoreCompileInputs.cache
+C:\Users\MatiOliva\Documents\06-Proyectos_STM32\sim800L\Terminal_TCP\Terminal_TCP\Terminal_TCP\obj\Debug\netcoreapp3.1\Terminal_TCP.dll
+C:\Users\MatiOliva\Documents\06-Proyectos_STM32\sim800L\Terminal_TCP\Terminal_TCP\Terminal_TCP\obj\Debug\netcoreapp3.1\Terminal_TCP.pdb
+C:\Users\MatiOliva\Documents\06-Proyectos_STM32\sim800L\Terminal_TCP\Terminal_TCP\Terminal_TCP\obj\Debug\netcoreapp3.1\Terminal_TCP.genruntimeconfig.cache

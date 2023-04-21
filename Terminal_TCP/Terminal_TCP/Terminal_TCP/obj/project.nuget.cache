@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "l0Metz+l7GFRfIQ+BWgYooiNza8g+fTv2vfwX9wiBCSZZmm7QyQfxd+xzEudHyrD/ClOeo0IMzea/cGeLL4GCA==",
+  "dgSpecHash": "02XAQx2fO8prKqQVFvmFOkxYURilQy3nBR2aGliDc9ffnaji8oNnYyCqMFcwanA35L+GcNDgW8MzGUfcLlE9lg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\mati9\\Documents\\01-ProyectosSTM32\\sim800L\\Terminal_TCP\\Terminal_TCP\\Terminal_TCP\\Terminal_TCP.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\MatiOliva\\Documents\\06-Proyectos_STM32\\sim800L\\Terminal_TCP\\Terminal_TCP\\Terminal_TCP\\Terminal_TCP.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\MatiOliva\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.22\\microsoft.netcore.app.host.win-x64.3.1.22.nupkg.sha512",
+    "C:\\Users\\MatiOliva\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "C:\\Users\\MatiOliva\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\MatiOliva\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512"
+  ],
   "logs": []
 }
