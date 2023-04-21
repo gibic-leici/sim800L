@@ -138,7 +138,6 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   printf("Test de comandos AT... \r\n");
-  SerialDebug(&huart1,&huart2,26);
 
   // Inicializacion de la clase con la que manejo el sim800L
 
@@ -147,7 +146,6 @@ int main(void)
 
   EnviarAT(&sim800);
   ConsultarEstadoSIM(&sim800);
-
 
   int bypass_conection = 0;
 
@@ -177,7 +175,7 @@ int main(void)
 		  		  ListarRedesDisponibles(&sim800);
 		  		  break;
 		  	  case 3:
-		  		  printf("Modo de Serial Debug. Ingrese ctr+z para salir");
+		  		  printf("Modo de Serial Debug. Ingrese ctr+z para salir\r\n");
 		  		  SerialDebug(&huart1,&huart2,26);
 		  		  break;
 
@@ -192,6 +190,7 @@ int main(void)
 
 
   InitGPRS(&sim800,1);
+  BorrarAllSMS(&sim800, 1);
 
   /* USER CODE END 2 */
 
@@ -206,19 +205,19 @@ int main(void)
 	printf("3) Enviar msj SMS \r\n");
 	printf("4) Testear el modo GPRS\r\n");
 	printf("5) Enviar un msj TCP\r\n");
-	printf("6) Enviar un msj largo (1500 bytes) por TCP\r\n");
+	printf("6) Enviar un msj largo (500 bytes) por TCP\r\n");
 
 	int opcion1;
 	char opcion2;
-	scanf("%d",&opcion1);
+	fflush(stdin);scanf("%d",&opcion1);
 
-	char IP [50] = "181.231.229.4";
+	char IP [50] = "163.10.76.36";
 	int puerto = 1050;
 
 	switch(opcion1)
 	{
 	case 1:
-		printf("Modo de Serial Debug. Ingrese ctr+z para salir");
+		printf("Modo de Serial Debug. Ingrese ctr+z para salir\r\n");
 		SerialDebug(&huart1,&huart2,26);
 		break;
 	case 2:
@@ -226,7 +225,7 @@ int main(void)
 				printf("Esperando por SMS...\r\n");
 				char comando1 [LEN_CMD] = "\r\nLED_TOGGLE\r\n";
 
-				if (ListenSMS(&sim800) == 1)
+				if (ListenSMS(&sim800,&huart1) == 1)
 				{
 					printf("Texto del mensaje: %s",sim800.txt_last_sms);
 					if(strncmp((sim800.txt_last_sms),comando1,strlen(comando1)) == 0)
@@ -261,8 +260,6 @@ int main(void)
 		printf("Enviando un msj largo al IP: %s\r\n",IP);
 		SendTCPtoIP(&sim800, sim800.buffer_largo , IP, puerto,1);
 		break;
-
-
 	}
 
 
