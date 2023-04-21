@@ -152,20 +152,6 @@ void Listen(SIM800* sim)
 	WaitForAnswer(sim,1);
 }
 
-
-void EnviarPuertoSerie(SIM800 *sim)
-{
-	char msj [LEN_CMD];
-	fflush(stdin);
-	scanf("%[^\r\n]", msj);
-	strcat(msj,"\r\n");
-
-	printf("Enviando: %s",msj);
-	fflush(stdin);
-	EnviarComandoAT(sim,msj,1);
-}
-
-
 void ConsultarSignal(SIM800* sim)
 {
 	EnviarComandoAT(sim,"AT+CSQ\r\n",1);
@@ -267,3 +253,27 @@ void ExtraerTextoDeSMS(SIM800 *sim, int indice, char * texto)
 	}
 	*(texto+j+1)='\0';
 }
+
+void SerialDebug( UART_HandleTypeDef * huart1 , UART_HandleTypeDef * huart2 , char caracter_finalizacion )
+{
+	uint8_t rx_byte = 0;
+
+	while(rx_byte != 26)
+	{
+
+
+		while (HAL_UART_Receive(huart2, &rx_byte, 1, 0) == HAL_OK)
+		{
+		    HAL_UART_Transmit(huart1, &rx_byte, 1, 0xFFFF); // Forward received byte to UART1
+		}
+		while (HAL_UART_Receive(huart1, &rx_byte, 1, 0) == HAL_OK)
+		{
+		    HAL_UART_Transmit(huart2, &rx_byte, 1, 0xFFFF); // Forward received byte to UART2
+		}
+
+
+	}
+}
+
+
+

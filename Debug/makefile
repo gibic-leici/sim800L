@@ -60,8 +60,8 @@ all: main-build
 main-build: sim800L.elf secondary-outputs
 
 # Tool invocations
-sim800L.elf sim800L.map: $(OBJS) $(USER_OBJS) C:\Users\mati9\OneDrive\Documentos\STM32\Proyectos\sim800L\STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "sim800L.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\mati9\OneDrive\Documentos\STM32\Proyectos\sim800L\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="sim800L.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+sim800L.elf sim800L.map: $(OBJS) $(USER_OBJS) C:\Users\MatiOliva\Documents\06-Proyectos_STM32\sim800L\STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "sim800L.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\MatiOliva\Documents\06-Proyectos_STM32\sim800L\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="sim800L.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

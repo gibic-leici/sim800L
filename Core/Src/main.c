@@ -138,6 +138,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   printf("Test de comandos AT... \r\n");
+  SerialDebug(&huart1,&huart2,26);
 
   // Inicializacion de la clase con la que manejo el sim800L
 
@@ -161,11 +162,10 @@ int main(void)
 			  printf("Todavia no se ha podido establecer la conexion.\r\n");
 		  	  printf("1) Reintentar\r\n");
 		  	  printf("2) Diagnosticar\r\n");
-		  	  printf("3) Ingresar comandos AT manualmente\r\n");
-		  	  printf("4) Continuar sin conexion");
+		  	  printf("3) Serial Debug\r\n");
+		  	  printf("4) Continuar sin conexion\r\n");
 
 		  	  int opcion;
-		  	  char opcion2;
 		  	  scanf("%d",&opcion);
 		  	  switch(opcion)
 		  	  {
@@ -177,13 +177,8 @@ int main(void)
 		  		  ListarRedesDisponibles(&sim800);
 		  		  break;
 		  	  case 3:
-		  		  do{
-		  			  printf("Ingrese el comando AT que desea enviar al modulo \r\n:");
-		  			  EnviarPuertoSerie(&sim800);
-		  			  printf("Desea ingresar otro comando? (s/n) \r\n");
-		  			  fflush(stdin);
-		  			  scanf("%c",&opcion2);
-		  		  }while( opcion2 == 's');
+		  		  printf("Modo de Serial Debug. Ingrese ctr+z para salir");
+		  		  SerialDebug(&huart1,&huart2,26);
 		  		  break;
 
 		  	  case 4:
@@ -206,7 +201,7 @@ int main(void)
   while (1)
   {
 	printf("Bienvenido al Test de SIM800L\r\n");
-	printf("1) Ingresar comandos AT manualmente\r\n");
+	printf("1) Serial Debug\r\n");
 	printf("2) Recibir msj SMS \r\n");
 	printf("3) Enviar msj SMS \r\n");
 	printf("4) Testear el modo GPRS\r\n");
@@ -223,14 +218,8 @@ int main(void)
 	switch(opcion1)
 	{
 	case 1:
-		do{
-			printf("Ingrese el comando AT que desea enviar al modulo \r\n:");
-			EnviarPuertoSerie(&sim800);
-
-			printf("Desea ingresar otro comando? (s/n) \r\n");
-			fflush(stdin);
-			scanf("%c",&opcion2);
-			}while( opcion2 == 's');
+		printf("Modo de Serial Debug. Ingrese ctr+z para salir");
+		SerialDebug(&huart1,&huart2,26);
 		break;
 	case 2:
 			do{

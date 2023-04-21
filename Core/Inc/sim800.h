@@ -33,10 +33,11 @@ void EnviarComandoAT(SIM800* sim, char* comando, int print);
 void Enviar(SIM800 *sim, char * cadena);
 void Imprimir_respuesta(SIM800 *sim); // Imprime y borra
 void Borrar_respuesta(SIM800 *sim);
-void EnviarPuertoSerie(SIM800 *sim);
 int WaitForAnswer(SIM800* sim,int print);
 void Listen(SIM800* sim);
 int isConnected(SIM800 *sim,int print);
+void SerialDebug( UART_HandleTypeDef * huart1 , UART_HandleTypeDef * huart2 , char caracter_finalizacion );
+
 
 // Funciones de status
 void ListarRedesDisponibles(SIM800* sim);
