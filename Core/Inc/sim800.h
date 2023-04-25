@@ -36,13 +36,14 @@ void Imprimir_respuesta(SIM800 *sim); // Imprime y borra
 void Borrar_respuesta(SIM800 *sim);
 int WaitForAnswer(SIM800* sim,int print);
 void SerialDebug( UART_HandleTypeDef * huart1 , UART_HandleTypeDef * huart2 , char caracter_finalizacion );
-
+int check_if_error(SIM800 *sim);
 
 // Funciones de status
 void EnviarAT(SIM800* sim);
 void ListarRedesDisponibles(SIM800* sim);
 void ConsultarEstadoSIM(SIM800* sim);
 void ConsultarSignal(SIM800* sim);
+void ConsultarBateria(SIM800 *sim);
 int isConnectedGPRS(SIM800 *sim,int print);
 int isConnected(SIM800 *sim,int print);
 

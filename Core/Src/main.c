@@ -190,7 +190,7 @@ int main(void)
   }
   printf("Conectado con exito\r\n");
 
-
+  ConsultarBateria(&sim800);
   InitGPRS(&sim800,1);
   BorrarAllSMS(&sim800, 1);
 
@@ -213,8 +213,8 @@ int main(void)
 	char opcion2;
 	fflush(stdin);scanf("%d",&opcion1);
 
-	char IP [50] = "163.10.76.36";
-	int puerto = 1050;
+	char IP [50] = "181.231.229.4";
+	int puerto = 1150;
 
 	switch(opcion1)
 	{

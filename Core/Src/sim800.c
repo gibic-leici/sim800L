@@ -134,11 +134,26 @@ void ConsultarEstadoSIM(SIM800* sim)
 	EnviarComandoAT(sim,"AT+CPIN?\r\n",1);
 }
 
+void ConsultarBateria(SIM800 *sim)
+{
+	// Formato de la respuesta: CARGANDO?,PORCENTAJE,TENSION
+
+	EnviarComandoAT(sim,"AT+CBC\r\n",0);
+	int cuenta_comas=0,i=0;
+	while((*(sim->response+i)!='\0')&&(cuenta_comas<2)){
+		if (*(sim->response+i)==','){cuenta_comas++;}
+		i++;
+	}
+	printf("Nivel de bateria: %c,%c%c%c V\r\n",*(sim->response+i),*(sim->response+i+1),*(sim->response+i+2),*(sim->response+i+3));
+
+}
+
 void ListarRedesDisponibles(SIM800* sim)
 {
 	EnviarComandoAT(sim,"AT+COPS=?\r\n",1);
 	WaitForAnswer(sim,1);
 }
+
 
 int isConnected(SIM800 *sim,int print)
 {
@@ -156,17 +171,17 @@ int isConnected(SIM800 *sim,int print)
 
 int isConnectedGPRS(SIM800 *sim,int print)
 {
-	// Si esta conectado cgatt me devuelve +CGATT: 1. Espero al espacio y me fijo el siguiente caracter
-	EnviarComandoAT(sim,"AT+CGATT?\r\n",print);
+	// Si esta conectado CIFSR me devuelve el IP, sino da error
 
-	int index = 0;
-	while( (*(sim->response +index) != 32) && (*(sim->response+index) != '\0') )
-	{
-		index++;
-	}
+	EnviarComandoAT(sim,"AT+CIFSR\r\n",print);	// Debería imprimir el IP
 
-	return (*(sim->response+index+1) == '1' )?1:0;
+	return (check_if_error(sim)==1 )? 0:1;
 
+}
+
+int check_if_error(SIM800 *sim)
+{
+	return (strstr(sim->response,"ERROR") != NULL )? 1 : 0;
 }
 
 
