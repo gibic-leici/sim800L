@@ -199,6 +199,10 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
+  char IP [50] = "181.231.229.4";
+  char numero_cel [50] = "+5492966544589";
+  int puerto = 1150;
+
   while (1)
   {
 	printf("Bienvenido al Test de SIM800L\r\n");
@@ -208,13 +212,13 @@ int main(void)
 	printf("4) Testear el modo GPRS\r\n");
 	printf("5) Enviar un msj TCP\r\n");
 	printf("6) Enviar un msj largo (500 bytes) por TCP\r\n");
+	printf("7) Cambiar destino de comunicacion TCP (IP y puerto) \r\n");
 
 	int opcion1;
 	char opcion2;
 	fflush(stdin);scanf("%d",&opcion1);
 
-	char IP [50] = "181.231.229.4";
-	int puerto = 1150;
+
 
 	switch(opcion1)
 	{
@@ -245,7 +249,7 @@ int main(void)
 			break;
 
 	case 3:
-		EnviarSMS(&sim800,"+5492966544589","Hola desde el SIM800 por SMS",1);
+		EnviarSMS(&sim800,numero_cel,"Hola desde el SIM800 por SMS",1);
 		break;
 
 	case 4:
@@ -261,6 +265,12 @@ int main(void)
 	case 6:
 		printf("Enviando un msj largo al IP: %s\r\n",IP);
 		SendTCPtoIP(&sim800, sim800.buffer_largo , IP, puerto,1);
+		break;
+	case 7:
+		printf("Ingrese el IP deseado (IP actual: %s):\r\n",IP);
+		scanf("%s",IP);fflush(stdin);
+		printf("Ingrese el puerto deseado(Puerto actual: %d):\r\n",puerto);
+		scanf("%d",&puerto);fflush(stdin);
 		break;
 	}
 
